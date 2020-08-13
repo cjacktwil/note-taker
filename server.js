@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const uniqid = require('uniqid');
 
 const { notes } = require('./db/db.json');
 
@@ -9,7 +10,6 @@ const PORT = process.env.PORT || 3003;
 const app = express();
 
 app.use(express.urlencoded({ extended: true}));
-
 app.use(express.json());
 
 app.use(express.static('public'));
@@ -24,17 +24,6 @@ function createNewNote(body, notesArray) {
     return note;
 };
 
-// validation not needed - save button only appears when fields have content
-// function validateNote(note) {
-//     if (!note.name || typeof note.name !== 'string') {
-//         return false;
-//     }
-//     if (!note.text || typeof note.text !== 'string') {
-//         return false;
-//     }
-//     return true;
-// };
-
 app.get('/api/notes', (req, res) => {
     res.json(notes);
 });
@@ -48,15 +37,11 @@ app.get('/notes', (req, res) => {
 });
 
 app.post('/api/notes', (req, res) => {
-    req.body.id = notes.length.toString();
-
-    // if (!validateNote(req.body)) {
-    //     res.status(400).send('Please be sure that the note has a title and some text.');
-    // } else {
+    req.body.id = uniqid();
+ 
     const note = createNewNote(req.body, notes);
 
-    res.json(req.body);
-    // }
+    res.json(note);
 });
 
 app.listen(PORT, () => {
