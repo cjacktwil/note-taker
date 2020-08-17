@@ -15,6 +15,7 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
+//function to create a new note
 function createNewNote(body, notesArray) {
     const note = body;
     notesArray.push(note);
@@ -25,28 +26,28 @@ function createNewNote(body, notesArray) {
     return note;
 };
 
+//function to find a note by its ID
 function findNoteById(id, notesArray) {
     const result = notesArray.filter(note => note.id === id)[0];
     return result;
 };
 
-// function validateNote(notesArray) {
-//     const newNoteArray = notesArray.filter(note => !note.body);
-//     console.log(newNoteArray);
-// };
-
+//get notes from api
 app.get('/api/notes', (req, res) => {
-            res.json(notes);
+    res.json(notes);
 });
 
+//get index page
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
+//get notes page
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/notes.html'));
 });
 
+//post new note to api
 app.post('/api/notes', (req, res) => {
     req.body.id = uniqid();
 
@@ -54,36 +55,22 @@ app.post('/api/notes', (req, res) => {
 
     res.json(note);
 });
-//working on delete function - don't want to delete link, how do I pull out specific note? need to use id...
+
+//partially working delete function - removes note but not spot in list
 app.delete('/api/notes/:id', (req, res) => {
-    // let id = req.params.id;
     const chosen = findNoteById(req.params.id, notes);
-    // console.log(id);
     console.log(chosen);
 
+    //iterate through array to find chosen note
     for (let i = 0; i < notes.length; i++) {
-        // console.log(notes[i]);
         if (chosen === notes[i]) {
-           notes[i] = {};
+            //remove content from note and overwrite to database
+            notes[i] = {};
             fs.writeFileSync(
                 path.join(__dirname, './db/db.json'),
                 JSON.stringify({ notes }, null, 2))
-            }
-            
-        // .then(() => {
-        //     res.json({success: true});
-        // })
-        // .catch(err => {
-        //     res.status.json({ err: err });
-    // }
-    // let notesArray = notes.filter(note => note != undefined);
-    // fs.writeFileSync(
-    //     path.join(__dirname, './db/db.json'),
-    //     JSON.stringify({ notesArray }, null, 2))
-
-    // notes = {};
-    // notes.push(newNotesArray);
-        };
+        }
+    };
     res.json(notes);
 });
 

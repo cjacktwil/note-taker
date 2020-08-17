@@ -9,17 +9,11 @@ var activeNote = {};
 
 // A function for getting all notes from the db
 var getNotes = function() {
-  // notes.forEach(note => {
-  //   if (note === {}) {
-  //       console.log("Note deleted")
-  //   } else {
   return $.ajax({
     url: "/api/notes",
     method: "GET"
   });
 };
-// });
-// };
 
 // A function for saving a note to the db
 var saveNote = function(note) {
