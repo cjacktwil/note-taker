@@ -1,49 +1,7 @@
 {
   "notes": [
-    {
-      "title": "Test Title",
-      "text": "Test text",
-      "id": "test_id"
-    },
-    {
-      "title": "Title Test",
-      "text": "More test text",
-      "id": "test_id_2"
-    },
-    {
-      "title": "Title Two",
-      "text": "Test test test",
-      "id": "2"
-    },
-    {
-      "title": "Title Three",
-      "text": "Test test test test",
-      "id": "3"
-    },
-    {
-      "title": "Title Four",
-      "text": "Test text test text",
-      "id": "4"
-    },
-    {
-      "title": "Title Five",
-      "text": " ",
-      "id": "5"
-    },
-    {
-      "title": "Title six",
-      "text": " ",
-      "id": "svpc9bdokdrvu23v"
-    },
-    {
-      "title": "Test Note",
-      "text": "Info for note ",
-      "id": "svpc969skdtbeghw"
-    },
-    {
-      "title": "Title Seven",
-      "text": "More testing of making notes",
-      "id": "svpc9340kdtbhhtk"
-    }
+    {},
+    {},
+    {}
   ]
 }
